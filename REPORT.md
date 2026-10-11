@@ -6,6 +6,7 @@ BAI 1: KIEM TRA CAI DAT DOCKER ENGINE VA CHAY CONTAINER HELLO-WORLD
 - Khoi chay container dau tien tren may ca nhan bang image hello-world.
 
 2. BOI CANH VA CAU HINH PHAN QUYEN DOCKER
+- Bối cảnh thực tế trên máy chủ Ubuntu 24.04 LTS (User duc_devops).
 - Neu user hien tai chua co quyen goi Docker Daemon truc tiep:
 ```bash
 sudo usermod -aG docker $USER && newgrp docker
@@ -15,7 +16,7 @@ sudo usermod -aG docker $USER && newgrp docker
 docker info
 ```
 
-3. CAC LENH THUC HIEN VA KET QUA TERMINAL
+3. CAC LENH THUC HIEN VA KET QUA TERMINAL THUC TE
 
 3.1. Kiem tra phien ban Docker CLI va Server (docker version)
 Lenh thuc hien:
@@ -25,29 +26,29 @@ docker version
 Ket qua dau ra Terminal:
 ```text
 Client: Docker Engine - Community
- Version:           27.3.1
- API version:       1.47
- Go version:        go1.22.7
- Git commit:        ce12230
- Built:             Fri Sep 20 11:41:00 2024
+ Version:           29.9.0
+ API version:       1.56
+ Go version:        go1.26.9
+ Git commit:        f415da8
+ Built:             Thu Oct  8 20:38:42 2026
  OS/Arch:           linux/amd64
  Context:           default
 
 Server: Docker Engine - Community
  Engine:
-  Version:          27.3.1
-  API version:      1.47 (minimum version 1.24)
-  Go version:       go1.22.7
-  Git commit:       4123218
-  Built:            Fri Sep 20 11:41:00 2024
+  Version:          29.9.0
+  API version:      1.56 (minimum version 1.40)
+  Go version:       go1.26.9
+  Git commit:       a5b58c9
+  Built:            Thu Oct  8 20:38:42 2026
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
-  Version:          1.7.22
-  GitCommit:        7f7fdf5fed64eb6a7caf99b3e12efcf9d60e311c
+  Version:          v2.4.1
+  GitCommit:        f2551031d7276a770f65f98c9b52e57e7dad07e8
  runc:
-  Version:          1.1.14
-  GitCommit:        v1.1.14-0-g2c9f560
+  Version:          1.5.2
+  GitCommit:        v1.5.2-0-g29dd3dc2
  docker-init:
   Version:          0.19.0
   GitCommit:        de40ad0
@@ -61,21 +62,26 @@ docker info
 Ket qua dau ra Terminal:
 ```text
 Client: Docker Engine - Community
- Version:    27.3.1
+ Version:    29.9.0
  Context:    default
  Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.38.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v5.6.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
 
 Server:
- Containers: 0
+ Containers: 1
   Running: 0
   Paused: 0
-  Stopped: 0
- Images: 1
- Server Version: 27.3.1
- Storage Driver: overlay2
-  Backing Filesystem: extfs
-  Supports d_type: true
-  Using metacopy: false
+  Stopped: 1
+ Images: 4
+ Server Version: 29.9.0
+ Storage Driver: overlayfs
+  driver-type: io.containerd.snapshotter.v1
  Logging Driver: json-file
  Cgroup Driver: systemd
  Cgroup Version: 2
@@ -83,13 +89,40 @@ Server:
   Volume: local
   Network: bridge host ipvlan macvlan null overlay
   Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
- Operating System: Ubuntu 22.04.5 LTS
+ CDI spec directories:
+  /etc/cdi
+  /var/run/cdi
+ Swarm: inactive
+ Runtimes: runc io.containerd.runc.v2
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: f2551031d7276a770f65f98c9b52e57e7dad07e8
+ runc version: v1.5.2-0-g29dd3dc2
+ init version: de40ad0
+ Security Options:
+  apparmor
+   Profile: default
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.8.0-31-generic
+ Operating System: Ubuntu 24.04.5 LTS
  OSType: linux
  Architecture: x86_64
- CPUs: 4
- Total Memory: 7.742GiB
+ CPUs: 2
+ Total Memory: 1.875GiB
+ Name: 10320102126523343
+ ID: 8aa8d2a9-12ab-4752-b4c4-b5a317c76e97
  Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+  ::1/128
  Live Restore Enabled: false
+ Firewall Backend: iptables
+  EnableUserlandProxy: true
+  UserlandProxyPath: /usr/bin/docker-proxy
 ```
 
 3.3. Khoi chay container dau tien (docker run hello-world)
@@ -99,12 +132,6 @@ docker run hello-world
 ```
 Ket qua dau ra Terminal:
 ```text
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
-c1ec31eb5944: Pull complete 
-Digest: sha256:305243d734571da2d100c8c8b3c3140a61152246bea3963d60b01b49ecf277e0
-Status: Downloaded newer image for hello-world:latest
-
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 
@@ -129,5 +156,5 @@ For more examples and ideas, visit:
 
 4. KET LUAN
 - Docker Engine da duoc cai dat dung cach va Docker Daemon dang hoat dong binh thuong.
-- User da co the tuong tac voi Docker CLI khong can sudo.
-- Container hello-world da tai thanh cong va in ra chuoi xac nhan hoat dong chinh xac.
+- User duc_devops da duoc gan vao nhom docker va tuong tac truc tiep khong can sudo.
+- Container hello-world chay thanh cong va in ra chuoi xac nhan hoat dong chinh xac.
